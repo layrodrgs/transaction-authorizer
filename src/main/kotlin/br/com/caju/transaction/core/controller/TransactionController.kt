@@ -7,6 +7,7 @@ import br.com.caju.transaction.core.controller.dto.response.TransactionDefaultRe
 import br.com.caju.transaction.domain.usecase.transaction.SendTransactionQueueUseCase
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,7 +20,7 @@ class TransactionController (
     private val log = LoggerFactory.getLogger(javaClass)
 
     @PostMapping
-    fun createTransaction(transactionRequest: TransactionRequest): TransactionDefaultResponse{
+    fun createTransaction(@RequestBody transactionRequest: TransactionRequest): TransactionDefaultResponse{
         useCase.execute(TransactionConverter.requestToDomain(transactionRequest))
             .also { transactionQueueUseCase.execute(it) }
         return TransactionDefaultResponse()
