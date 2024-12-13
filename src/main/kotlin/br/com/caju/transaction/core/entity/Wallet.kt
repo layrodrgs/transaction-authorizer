@@ -10,8 +10,9 @@ class Wallet(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long? = null,
+        @Enumerated(EnumType.STRING)
         val type: TransactionType,
         val amount: BigDecimal,
         @ManyToOne
-        val account: Account
+        val account: Account? = null
 )

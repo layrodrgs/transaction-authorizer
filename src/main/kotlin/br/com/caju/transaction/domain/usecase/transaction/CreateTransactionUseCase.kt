@@ -1,4 +1,4 @@
-package br.com.caju.transaction.domain.usecase
+package br.com.caju.transaction.domain.usecase.transaction
 
 import br.com.caju.transaction.adapter.converter.TransactionConverter
 import br.com.caju.transaction.domain.dto.TransactionDomain
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 @Component
 class CreateTransactionUseCase (
         private val transactionDataProvider: TransactionDataProvider,
-        private val rabbitMqProducerAdapter: RabbitMqProducerAdapter
+        private val rabbitMqProducerAdapter: RabbitMqProducerAdapter,
 ){
     private val log = LoggerFactory.getLogger(javaClass)
 
