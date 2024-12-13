@@ -9,16 +9,14 @@ import org.springframework.stereotype.Component
 
 @Component
 class CreateTransactionUseCase (
-        private val transactionDataProvider: TransactionDataProvider,
-        private val rabbitMqProducerAdapter: RabbitMqProducerAdapter,
+        private val transactionDataProvider: TransactionDataProvider
 ){
     private val log = LoggerFactory.getLogger(javaClass)
 
-    fun execute(transactionDomain: TransactionDomain){
+    fun execute(transactionDomain: TransactionDomain): TransactionDomain{
         log.info("m=execute, step=initial")
 
-        transactionDataProvider.save(transactionDomain)
-                .also { rabbitMqProducerAdapter.sendToQueueTransaction(TransactionConverter.domainToMessage(transactionDomain)) }
+        return transactionDataProvider.save(transactionDomain)
                 .also { log.info("m=execute, step=initial, transactionCode={}", it.transactionCode) }
     }
 }

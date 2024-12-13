@@ -21,6 +21,7 @@ class ProcessTransactionUseCase(
 
         factory.getStrategyByMcc(merchant?.mcc)
                 .process(transactionDomain)
+                .also { createTransactionUseCase.execute(createTransactionDomain(transactionDomain)) }
                 .also { log.info("m=execute, step=end ") }
     }
 
