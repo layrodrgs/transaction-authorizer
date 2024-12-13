@@ -4,11 +4,12 @@ import br.com.caju.transaction.core.entity.enumerated.TransactionType
 import java.math.BigDecimal
 import java.util.*
 
-class TransactionDomain(
+data class TransactionDomain(
         val amount: BigDecimal,
         val type: TransactionType,
         val transactionCode: String = UUID.randomUUID().toString(),
         val account: AccountdDomain?,
         val wallet: WalletDomain? = null,
-        val merchant: MerchantDomain
+        val merchant: MerchantDomain,
+        val step: String = "START"
 )

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class RabbitMQConfig {
-
     @Bean
     fun producerJackson2MessageConverter(): Jackson2JsonMessageConverter {
         return Jackson2JsonMessageConverter()

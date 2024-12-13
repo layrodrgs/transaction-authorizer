@@ -46,7 +46,7 @@ class TransactionConverter {
         fun domainToMessage(transaction: TransactionDomain): TransactionMessage {
             return TransactionMessage(
                     totalAmount = transaction.amount,
-                    type = transaction.type.toString(),
+                    type = transaction.type,
                     merchant = (transaction.merchant.name ?: transaction.merchant.mcc)!!,
                     mcc = transaction.merchant.mcc!!,
                     account = transaction.account?.number
@@ -56,7 +56,7 @@ class TransactionConverter {
         fun messageToDomain(transactionMessage: TransactionMessage): TransactionDomain{
             return TransactionDomain(
                 amount = transactionMessage.totalAmount,
-                type = TransactionType.valueOf(transactionMessage.type),
+                type = transactionMessage.type!!,
                 account = AccountdDomain(number = transactionMessage.account!!),
                 merchant = MerchantDomain(mcc = transactionMessage.merchant,
                     name = transactionMessage.merchant)
