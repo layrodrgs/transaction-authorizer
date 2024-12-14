@@ -1,4 +1,4 @@
-package domain.usecase
+package domain.usecase.transaction
 
 import br.com.caju.transaction.adapter.dataprovider.TransactionDataProvider
 import br.com.caju.transaction.core.entity.enumerated.TransactionType

@@ -1,4 +1,4 @@
-package domain.usecase
+package domain.usecase.account
 
 import br.com.caju.transaction.adapter.dataprovider.AccountDataProvider
 import br.com.caju.transaction.domain.dto.AccountdDomain
