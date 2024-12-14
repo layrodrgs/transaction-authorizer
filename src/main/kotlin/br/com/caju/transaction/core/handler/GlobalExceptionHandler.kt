@@ -1,6 +1,7 @@
 package br.com.caju.transaction.core.handler
 
 import br.com.caju.transaction.core.controller.dto.response.TransactionDefaultResponse
+import io.swagger.v3.oas.annotations.media.Schema
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

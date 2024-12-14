@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 class OpenApiConfig {
-
     @Bean
     fun customOpenAPI(): OpenAPI {
         return OpenAPI()
+
                 .info(
                         Info()
                                 .title("Transaction API")
