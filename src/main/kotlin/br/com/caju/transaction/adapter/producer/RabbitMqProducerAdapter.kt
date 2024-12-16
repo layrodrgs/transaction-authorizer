@@ -8,6 +8,6 @@ class RabbitMqProducerAdapter(
         private val rabbitMqProducer: RabbitMqProducer
 ) {
     fun sendToQueueTransaction(payload: Any){
-        rabbitMqProducer.sendToQueue(routingKey = "creation", exchange = "transaction", payload = payload)
+        rabbitMqProducer.sendToQueue(routingKey = "transaction.routing.key", exchange = "transaction.exchange", payload = payload)
     }
 }

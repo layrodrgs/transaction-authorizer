@@ -12,7 +12,7 @@ class TransactionConsumer(
     private val processTransactionUseCase: ProcessTransactionUseCase
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
-    @RabbitListener(queues = ["transaction"])
+    @RabbitListener(queues = ["transaction.queue"])
     fun startConsumer(message: TransactionMessage){
         log.info("M=startConsumer, step=initial, params={}", message)
         processTransactionUseCase.execute(TransactionConverter.messageToDomain(message))

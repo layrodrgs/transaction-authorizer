@@ -1,7 +1,6 @@
 package domain.usecase.transaction
 
 import br.com.caju.transaction.adapter.dataprovider.TransactionDataProvider
-import br.com.caju.transaction.core.entity.Wallet
 import br.com.caju.transaction.core.entity.enumerated.TransactionType
 import br.com.caju.transaction.domain.dto.AccountdDomain
 import br.com.caju.transaction.domain.dto.MerchantDomain
