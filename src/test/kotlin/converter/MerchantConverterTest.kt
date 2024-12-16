@@ -10,10 +10,8 @@ class MerchantConverterTest {
     fun `should convert Merchant to MerchantDomain correctly`() {
         val merchant = Merchant(mcc = "1234", name = "Merchant A")
 
-        // Act
         val merchantDomain = MerchantConverter.toDomain(merchant)
 
-        // Assert
         assertNotNull(merchantDomain)
         assertEquals("1234", merchantDomain.mcc)
         assertEquals("Merchant A", merchantDomain.name)

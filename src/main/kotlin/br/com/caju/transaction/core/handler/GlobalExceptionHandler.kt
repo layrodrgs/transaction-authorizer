@@ -1,6 +1,7 @@
 package br.com.caju.transaction.core.handler
 
 import br.com.caju.transaction.core.controller.dto.response.TransactionDefaultResponse
+import br.com.caju.transaction.domain.exception.InsuficientAmountException
 import io.swagger.v3.oas.annotations.media.Schema
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -13,6 +14,12 @@ class GlobalExceptionHandler (
 ){
     private val log = LoggerFactory.getLogger(javaClass)
 
+    @ExceptionHandler(InsuficientAmountException::class)
+    fun handleRuntimeException(ex: InsuficientAmountException): ResponseEntity<TransactionDefaultResponse> {
+        log.error("error, ", ex)
+        val errorResponse = TransactionDefaultResponse(code = "55")
+        return ResponseEntity(errorResponse, HttpStatus.OK)
+    }
     @ExceptionHandler(RuntimeException::class)
     fun handleRuntimeException(ex: RuntimeException): ResponseEntity<TransactionDefaultResponse> {
         log.error("error, ", ex)

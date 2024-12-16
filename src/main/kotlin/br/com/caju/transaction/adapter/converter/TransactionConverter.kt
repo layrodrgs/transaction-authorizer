@@ -1,11 +1,10 @@
 package br.com.caju.transaction.adapter.converter
 
+import br.com.caju.transaction.adapter.producer.message.AccountMessage
+import br.com.caju.transaction.adapter.producer.message.MerchantMessage
 import br.com.caju.transaction.adapter.producer.message.TransactionMessage
 import br.com.caju.transaction.core.controller.dto.request.TransactionRequest
-import br.com.caju.transaction.core.entity.Account
-import br.com.caju.transaction.core.entity.Merchant
 import br.com.caju.transaction.core.entity.Transaction
-import br.com.caju.transaction.core.entity.enumerated.TransactionType
 import br.com.caju.transaction.domain.dto.AccountdDomain
 import br.com.caju.transaction.domain.dto.MerchantDomain
 import br.com.caju.transaction.domain.dto.TransactionDomain
@@ -47,9 +46,8 @@ class TransactionConverter {
             return TransactionMessage(
                     totalAmount = transaction.amount,
                     type = transaction.type,
-                    merchant = (transaction.merchant.name ?: transaction.merchant.mcc)!!,
-                    mcc = transaction.merchant.mcc!!,
-                    account = transaction.account?.number
+                    merchant = MerchantMessage(mcc = transaction.merchant.mcc, name = transaction.merchant.name),
+                    account = AccountMessage(id = transaction.account?.id, number = transaction.account!!.number)
             )
         }
 
@@ -57,9 +55,11 @@ class TransactionConverter {
             return TransactionDomain(
                 amount = transactionMessage.totalAmount,
                 type = transactionMessage.type!!,
-                account = AccountdDomain(number = transactionMessage.account!!),
-                merchant = MerchantDomain(mcc = transactionMessage.merchant,
-                    name = transactionMessage.merchant)
+                account = AccountdDomain(number = transactionMessage.account!!.number, id = transactionMessage.account.id),
+                merchant = MerchantDomain(
+                    mcc = transactionMessage.merchant.mcc,
+                    name = transactionMessage.merchant.name
+                )
             )
         }
     }

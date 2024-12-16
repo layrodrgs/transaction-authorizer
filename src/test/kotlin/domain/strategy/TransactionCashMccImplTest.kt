@@ -1,25 +1,24 @@
 package domain.strategy
 
+import br.com.caju.transaction.domain.dto.WalletDomain
 import br.com.caju.transaction.domain.strategy.TransactionCashMccImpl
-import br.com.caju.transaction.domain.usecase.wallet.WalletSubtractUseCase
+import br.com.caju.transaction.domain.usecase.wallet.FindByTransactionTypeAndAccountNumberUseCase
 import io.mockk.every
-import io.mockk.just
 import io.mockk.mockk
-import io.mockk.runs
 import org.junit.jupiter.api.Test
 import kotlin.test.assertTrue
 
 class TransactionCashMccImplTest {
-    private val walletSubtractUseCase: WalletSubtractUseCase = mockk<WalletSubtractUseCase>()
+    private val findByTransactionTypeAndAccountNumberUseCase: FindByTransactionTypeAndAccountNumberUseCase = mockk<FindByTransactionTypeAndAccountNumberUseCase>()
+
 
     private val transacton = TransactionCashMccImpl(
-        walletSubtractUseCase = walletSubtractUseCase
+        findByTransactionTypeAndAccountNumberUseCase = findByTransactionTypeAndAccountNumberUseCase
     )
 
     @Test
     fun `should veriify mcc for cash`() {
-
-        every { walletSubtractUseCase.execute(any(), any()) } just runs
+        every { findByTransactionTypeAndAccountNumberUseCase.execute(any(), any()) } returns WalletDomain()
 
         assertTrue { transacton.equalsMcc("123") }
     }
